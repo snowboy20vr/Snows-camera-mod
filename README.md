@@ -1,99 +1,142 @@
 # Snow's Camera Mod
 
-**Snow's Camera Mod 2.0** is a PC-focused Gorilla Tag camera/casting mod with an in-game tablet, spectator tools, freecam, local branding, a tiny snow watermark, and an optional Plus tier.
+A PC/VR Gorilla Tag camera mod with a physical in-game tablet, spectator camera, freecam, smooth PC-style third person, local orange crown, snowflake trail and separate Free/Plus builds.
 
-## Free
-- In-game camera tablet with F6
-- 1st person, normal PC-style 3rd person, spectator and freecam
-- Player list and quick target switching
-- FOV, smoothness, near clip, distance and height controls
-- Camera collision and auto orbit
-- Action and close presets
-- Orange local crown badge with optional local custom name
-- Tiny faint white snow watermark
-- Snow, Minimal, Orange and Midnight watermark themes
-- Safe in-game camera-core injector/activator
+## Builds
 
-## Plus
-- Remove watermark
-- Cinema preset
-- Aurora theme
-- Premium camera profiles
-- Advanced casting controls
-- Persistent local Plus activation
+### Free
+Output:
 
-## Tablet
-**CAMERA** controls the camera.
+`Free/bin/Release/SnowsCameraFree.dll`
 
-**SPECTATE** shows detected players and lets you select a target.
+Includes:
+- Physical Snow's Camera tablet
+- Tablet dock near the Stump/Treehouse
+- Y button summon
+- Configurable keyboard summon key
+- VR Y-style controller input
+- Snowflake particle trail
+- 1st person
+- PC-style 3rd person
+- Freecam
+- Spectator mode
+- Player list
+- FOV
+- Smoothness
+- Near clip
+- Distance/height
+- Camera collision
+- Auto orbit
+- Orange local crown
+- Custom local name
+- Free watermark themes
 
-**STYLE** controls the tiny watermark, themes, crown and local custom name.
+### Plus
+Output:
 
-**INJECTOR** activates the camera core and accepts Plus keys.
+`Plus/bin/Release/SnowsCameraPlus.dll`
 
-**PLUS** shows the current license and Plus feature list.
+The Plus build depends on the Free build and adds:
+- PC activation GUI
+- Plus key entry
+- Premium camera features
+- Remove-watermark support
+- Premium presets/themes
+
+## Physical tablet
+
+The Free build creates a 3D tablet object in-game.
+
+When a Stump/Treehouse object is detected, a small orange dock marker is placed nearby. The tablet is stored there while inactive.
+
+Press **Y** to call the tablet.
+
+When called, the tablet moves into the player's camera view and emits a small white snowflake trail.
+
+Press Y again to put it away.
+
+F6 remains available as a desktop fallback for the existing camera interface.
+
+## Changing the summon key
+
+The default keyboard summon key is:
+
+`Y`
+
+BepInEx stores the setting in:
+
+`BepInEx/config/com.snow.snowscamerafree.cfg`
+
+Change:
+
+`Tablet Keyboard Button = Y`
+
+to another keyboard key if desired.
+
+VR input also supports the common Y-style controller button mapping.
+
+## Plus PC activation
+
+Install both:
+
+`SnowsCameraFree.dll`
+
+and
+
+`SnowsCameraPlus.dll`
+
+Then launch Gorilla Tag and press:
+
+**F8**
+
+The Plus PC panel lets you enter:
+
+`SCM-XXXX-XXXX-XXXX-XXXX-XXXX`
+
+The key is checked by the existing local license manager.
+
+## Build Free
+
+From the repository root:
+
+```powershell
+dotnet build Free/SnowsCameraFree.csproj -c Release
+```
+
+## Build Plus
+
+Build Free first:
+
+```powershell
+dotnet build Free/SnowsCameraFree.csproj -c Release
+dotnet build Plus/SnowsCameraPlus.csproj -c Release
+```
+
+## Installation
+
+Put both DLLs in:
+
+`Gorilla Tag/BepInEx/plugins/`
+
+Do not install the old `SnowsCameraMod.dll` at the same time. Use the new Free + Plus pair.
 
 ## Controls
 
-| Key | Action |
+| Input | Action |
 |---|---|
-| F6 | Open / close camera tablet |
+| Y | Call / hide physical tablet |
+| F6 | Desktop camera interface |
 | F7 | Cycle camera mode |
 | [ | Previous player |
 | ] | Next player |
 | W A S D | Freecam movement |
-| Q / E | Freecam down / up |
-| Hold RMB | Freecam look |
+| Q / E | Freecam vertical movement |
+| Right mouse | Freecam look |
 | Shift | Freecam speed |
+| F8 | Plus PC activation panel |
 
-## Plus key format
+## Important
 
-Keys use exactly:
+The Plus key system is local client-side licensing. It is not unbreakable DRM. A user who modifies their own local assembly can bypass a local-only check. A real commercial licensing system should use a server-backed activation service.
 
-`SCM-XXXX-XXXX-XXXX-XXXX-XXXX`
-
-Only uppercase **A-F** and **0-9** are accepted in each block.
-
-The repository stores SHA-256 hashes rather than plaintext keys.
-
-**Important:** this is client-side licensing, not secure commercial DRM. A user who modifies the local DLL can bypass a local check. A real commercial Plus service should use a server-backed activation system.
-
-## Build
-
-Game/reference DLLs are intentionally not committed.
-
-1. Install Gorilla Tag on Steam.
-2. Install BepInEx 5.
-3. Start Gorilla Tag once, then close it.
-4. Put these DLLs in `libs/`:
-   - `BepInEx.dll`
-   - `0Harmony.dll`
-   - `Assembly-CSharp.dll`
-   - `UnityEngine.CoreModule.dll`
-   - `UnityEngine.IMGUIModule.dll`
-   - `UnityEngine.InputLegacyModule.dll`
-   - `UnityEngine.PhysicsModule.dll`
-5. Install .NET SDK 8+.
-6. Run `dotnet build -c Release`.
-7. Copy `bin/Release/SnowsCameraMod.dll` into `Gorilla Tag/BepInEx/plugins/`.
-
-## Architecture
-
-- `Plugin.cs` — entry point and hotkeys
-- `CameraController.cs` — camera modes and movement
-- `PlayerTracker.cs` — player/VR rig discovery
-- `CameraUI.cs` — in-game tablet
-- `BadgeOverlay.cs` — local crown
-- `WatermarkOverlay.cs` — watermark and themes
-- `LicenseManager.cs` — Plus key validation
-- `RuntimeReflection.cs` — compatibility layer
-
-The camera is independent from the headset camera for PC/desktop recording and OBS capture.
-
-## Branding behavior
-
-The orange crown/custom name is local-only and always belongs to the local player. It never creates a fake network identity or claims another player is using the mod.
-
-## Modding note
-
-Use mods according to Gorilla Tag's current rules and keep gameplay-interfering mods out of public lobbies. This project is designed for camera/casting functionality, not gameplay advantages.
+Use camera/casting mods according to Gorilla Tag's current modding rules and avoid gameplay advantages in public lobbies.
