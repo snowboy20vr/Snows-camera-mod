@@ -1,32 +1,43 @@
 # Snow's Camera Mod
 
-A clean, modern PC camera and spectator mod for Gorilla Tag.
+**Snow's Camera Mod 2.0** is a PC-focused Gorilla Tag camera/casting mod with an in-game tablet, spectator tools, freecam, local branding, a tiny snow watermark, and an optional Plus tier.
 
-## Included
+## Free
+- In-game camera tablet with F6
+- 1st person, normal PC-style 3rd person, spectator and freecam
+- Player list and quick target switching
+- FOV, smoothness, near clip, distance and height controls
+- Camera collision and auto orbit
+- Action and close presets
+- Orange local crown badge with optional local custom name
+- Tiny faint white snow watermark
+- Snow, Minimal, Orange and Midnight watermark themes
+- Safe in-game camera-core injector/activator
 
-- **1st person** camera
-- **Normal PC-style 3rd person** camera
-- **Spectator** mode with a player selector
-- **Freecam** with WASD + mouse look
-- Smooth camera movement
-- FOV control
-- Smoothness control
-- Near-clip control
-- Third-person distance control
-- Camera collision
-- Auto-orbit
-- Player list with detected names
-- Previous/next player hotkeys
-- Clean orange-accent desktop UI
-- Local orange **♛ CAMERA** badge
-- Optional local custom name beside the crown
-- No fake network identity changes
+## Plus
+- Remove watermark
+- Cinema preset
+- Aurora theme
+- Premium camera profiles
+- Advanced casting controls
+- Persistent local Plus activation
+
+## Tablet
+**CAMERA** controls the camera.
+
+**SPECTATE** shows detected players and lets you select a target.
+
+**STYLE** controls the tiny watermark, themes, crown and local custom name.
+
+**INJECTOR** activates the camera core and accepts Plus keys.
+
+**PLUS** shows the current license and Plus feature list.
 
 ## Controls
 
 | Key | Action |
 |---|---|
-| F6 | Open / close camera UI |
+| F6 | Open / close camera tablet |
 | F7 | Cycle camera mode |
 | [ | Previous player |
 | ] | Next player |
@@ -35,14 +46,26 @@ A clean, modern PC camera and spectator mod for Gorilla Tag.
 | Hold RMB | Freecam look |
 | Shift | Freecam speed |
 
+## Plus key format
+
+Keys use exactly:
+
+`SCM-XXXX-XXXX-XXXX-XXXX-XXXX`
+
+Only uppercase **A-F** and **0-9** are accepted in each block.
+
+The repository stores SHA-256 hashes rather than plaintext keys.
+
+**Important:** this is client-side licensing, not secure commercial DRM. A user who modifies the local DLL can bypass a local check. A real commercial Plus service should use a server-backed activation system.
+
 ## Build
 
-This is a **source project**. Game/reference DLLs are intentionally not committed.
+Game/reference DLLs are intentionally not committed.
 
 1. Install Gorilla Tag on Steam.
-2. Install BepInEx 5 with a current Gorilla Tag mod manager.
+2. Install BepInEx 5.
 3. Start Gorilla Tag once, then close it.
-4. Copy these DLLs into `libs/`:
+4. Put these DLLs in `libs/`:
    - `BepInEx.dll`
    - `0Harmony.dll`
    - `Assembly-CSharp.dll`
@@ -51,42 +74,26 @@ This is a **source project**. Game/reference DLLs are intentionally not committe
    - `UnityEngine.InputLegacyModule.dll`
    - `UnityEngine.PhysicsModule.dll`
 5. Install .NET SDK 8+.
-6. Run:
-
-```text
-dotnet build -c Release
-```
-
-7. Copy `bin/Release/SnowsCameraMod.dll` into:
-
-```text
-Gorilla Tag/BepInEx/plugins/
-```
+6. Run `dotnet build -c Release`.
+7. Copy `bin/Release/SnowsCameraMod.dll` into `Gorilla Tag/BepInEx/plugins/`.
 
 ## Architecture
 
-- `Plugin.cs` — BepInEx entry point and hotkeys.
-- `CameraController.cs` — camera modes, smoothing, orbit, collision and freecam.
-- `PlayerTracker.cs` — runtime player/VR rig discovery.
-- `CameraUI.cs` — desktop control panel.
-- `BadgeOverlay.cs` — local orange crown/camera marker.
-- `RuntimeReflection.cs` — compatibility layer for changing Gorilla Tag fields.
+- `Plugin.cs` — entry point and hotkeys
+- `CameraController.cs` — camera modes and movement
+- `PlayerTracker.cs` — player/VR rig discovery
+- `CameraUI.cs` — in-game tablet
+- `BadgeOverlay.cs` — local crown
+- `WatermarkOverlay.cs` — watermark and themes
+- `LicenseManager.cs` — Plus key validation
+- `RuntimeReflection.cs` — compatibility layer
 
-The camera is independent from the headset camera, making it suitable for normal PC/desktop recording and OBS capture.
+The camera is independent from the headset camera for PC/desktop recording and OBS capture.
 
-## Safety / lobby use
+## Branding behavior
 
-Use mods according to Gorilla Tag's current rules. The Gorilla Tag modding guide specifically notes that gameplay-interfering mods should be kept to private lobbies. This camera mod is designed around camera/casting functionality rather than gameplay advantages.
+The orange crown/custom name is local-only and always belongs to the local player. It never creates a fake network identity or claims another player is using the mod.
 
-## Current limitation
+## Modding note
 
-The orange crown/custom name is intentionally **local-only**. It does not pretend to be a real networked name tag and does not write a custom identity into Photon/player data. That keeps the visual feature clean and avoids depending on unstable game-networking internals.
-
-## Roadmap
-
-- Camera presets
-- Cinematic keyframes
-- Smooth orbit profiles
-- OBS clean-output toggle
-- Camera bookmarks
-- Better VRRig name resolution across game updates
+Use mods according to Gorilla Tag's current rules and keep gameplay-interfering mods out of public lobbies. This project is designed for camera/casting functionality, not gameplay advantages.
