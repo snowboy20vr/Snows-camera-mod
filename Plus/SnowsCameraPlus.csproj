@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>SnowsCameraPlus</AssemblyName>
+    <RootNamespace>SnowsCameraPlus</RootNamespace>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>..\libs\BepInEx.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>..\libs\UnityEngine.CoreModule.dll</HintPath></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>..\libs\UnityEngine.IMGUIModule.dll</HintPath></Reference>
+    <Reference Include="SnowsCameraFree"><HintPath>..\Free\bin\Release\SnowsCameraFree.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>
