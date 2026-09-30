@@ -94,7 +94,13 @@ dotnet build (Join-Path $Root "Free\SnowsCameraFree.csproj") -c Release
 if ($LASTEXITCODE -ne 0) { throw "Free build failed." }
 
 $FreeDll = Join-Path $Root "Free\bin\Release\SnowsCameraFree.dll"
-if (-not (Test-Path $FreeDll)) { throw "Free DLL was not produced." }
+if (-not (Test-Path $FreeDll)) {
+    $FreeDll = Join-Path $Root "Free\bin\Release\net472\SnowsCameraFree.dll"
+}
+if (-not (Test-Path $FreeDll)) {
+    throw "Free DLL was not produced. Checked Release and Release\net472 output folders."
+}
+Write-Host "Free DLL: $FreeDll" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "Building Plus..." -ForegroundColor Cyan
@@ -102,7 +108,13 @@ dotnet build (Join-Path $Root "Plus\SnowsCameraPlus.csproj") -c Release
 if ($LASTEXITCODE -ne 0) { throw "Plus build failed." }
 
 $PlusDll = Join-Path $Root "Plus\bin\Release\SnowsCameraPlus.dll"
-if (-not (Test-Path $PlusDll)) { throw "Plus DLL was not produced." }
+if (-not (Test-Path $PlusDll)) {
+    $PlusDll = Join-Path $Root "Plus\bin\Release\net472\SnowsCameraPlus.dll"
+}
+if (-not (Test-Path $PlusDll)) {
+    throw "Plus DLL was not produced. Checked Release and Release\net472 output folders."
+}
+Write-Host "Plus DLL: $PlusDll" -ForegroundColor Green
 
 $Plugins = Join-Path $Game "BepInEx\plugins"
 New-Item -ItemType Directory -Force -Path $Plugins | Out-Null
