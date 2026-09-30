@@ -11,6 +11,7 @@ namespace SnowsCameraMod
         internal CameraController Camera;
         internal PlayerTracker Players;
         internal CameraUI UI;
+        internal BadgeOverlay Badge;
         internal ConfigEntry<KeyCode> ToggleKey;
         internal ConfigEntry<KeyCode> CycleModeKey;
         internal ConfigEntry<KeyCode> NextPlayerKey;
@@ -27,6 +28,7 @@ namespace SnowsCameraMod
             Players = gameObject.AddComponent<PlayerTracker>();
             Camera = gameObject.AddComponent<CameraController>();
             UI = gameObject.AddComponent<CameraUI>();
+            Badge = gameObject.AddComponent<BadgeOverlay>();
             Logger.LogInfo("Snow's Camera Mod loaded.");
         }
 
