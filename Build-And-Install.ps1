@@ -62,6 +62,7 @@ New-Item -ItemType Directory -Force -Path $Libs | Out-Null
 $required = @(
     @{ Name="UnityEngine.dll"; Path=(Join-Path $Managed "UnityEngine.dll") },
     @{ Name="UnityEngine.ParticleSystemModule.dll"; Path=(Join-Path $Managed "UnityEngine.ParticleSystemModule.dll") },
+    @{ Name="UnityEngine.TextRenderingModule.dll"; Path=(Join-Path $Managed "UnityEngine.TextRenderingModule.dll") },
     @{ Name="Assembly-CSharp.dll"; Path=(Join-Path $Managed "Assembly-CSharp.dll") },
     @{ Name="UnityEngine.CoreModule.dll"; Path=(Join-Path $Managed "UnityEngine.CoreModule.dll") },
     @{ Name="UnityEngine.IMGUIModule.dll"; Path=(Join-Path $Managed "UnityEngine.IMGUIModule.dll") },
