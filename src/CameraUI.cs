@@ -4,7 +4,7 @@ namespace SnowsCameraMod
 {
     public sealed class CameraUI : MonoBehaviour
     {
-        private bool visible = true;
+        private bool visible = false;
         private Vector2 playerScroll;
         private Rect tabletRect = new Rect(26, 26, 510, 700);
         private int selectedTab;
@@ -63,7 +63,7 @@ namespace SnowsCameraMod
             GUILayout.Label(plus ? "PLUS" : "FREE", plus ? subHeader : small, GUILayout.Width(55));
             if (GUILayout.Button("×", button, GUILayout.Width(34), GUILayout.Height(30))) visible = false;
             GUILayout.EndHorizontal();
-            GUILayout.Label("IN-GAME CAMERA TABLET  •  PC CASTING", small);
+            GUILayout.Label("SNOW TABLET  •  PC CASTING", small);
             GUILayout.Space(10);
 
             GUILayout.BeginHorizontal();
@@ -78,7 +78,7 @@ namespace SnowsCameraMod
             else DrawPlusTab(plus);
 
             GUILayout.Space(8);
-            GUILayout.Label("F6 Tablet  •  F7 Mode  •  [ / ] Target", small);
+            GUILayout.Label("Y  Call Tablet  •  F6  Desktop UI  •  F7 Mode", small);
             GUI.DragWindow(new Rect(0, 0, 10000, 24));
             GUILayout.EndVertical();
         }
