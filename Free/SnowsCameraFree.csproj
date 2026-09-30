@@ -7,6 +7,7 @@
     <AssemblyName>SnowsCameraFree</AssemblyName>
     <RootNamespace>SnowsCameraMod</RootNamespace>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\src\*.cs" Exclude="..\src\PlusOnly*.cs" />
