@@ -1,8 +1,17 @@
+# Local Gorilla Tag/BepInEx reference assemblies
+libs/*.dll
+
+# Build output
 bin/
 obj/
+Free/bin/
+Free/obj/
+Plus/bin/
+Plus/obj/
+
+# Visual Studio / VS Code
 .vs/
 .vscode/
-*.user
-*.suo
-*.csproj.user
-libs/*.dll
+
+# BepInEx local config
+BepInEx/config/
