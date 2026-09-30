@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BepInEx"><HintPath>..\libs\BepInEx.dll</HintPath></Reference>
+    <Reference Include="UnityEngine"><HintPath>..\libs\UnityEngine.dll</HintPath></Reference>
     <Reference Include="UnityEngine.CoreModule"><HintPath>..\libs\UnityEngine.CoreModule.dll</HintPath></Reference>
     <Reference Include="UnityEngine.IMGUIModule"><HintPath>..\libs\UnityEngine.IMGUIModule.dll</HintPath></Reference>
     <Reference Include="SnowsCameraFree"><HintPath>..\Free\bin\Release\SnowsCameraFree.dll</HintPath></Reference>
