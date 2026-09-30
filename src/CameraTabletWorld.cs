@@ -14,6 +14,7 @@ namespace SnowsCameraMod
         private Transform dock;
         private Transform localHead;
         private float nextTrailBurst;
+        private float nextDockScan;
 
         private void Start()
         {
@@ -26,6 +27,12 @@ namespace SnowsCameraMod
         private void Update()
         {
             if (Plugin.Instance == null) return;
+
+            if (dock != null && !dock.gameObject.activeSelf && Time.unscaledTime >= nextDockScan)
+            {
+                nextDockScan = Time.unscaledTime + 2f;
+                FindDock();
+            }
 
             if (Plugin.Instance.TabletButtonPressed())
                 Toggle();
@@ -42,6 +49,8 @@ namespace SnowsCameraMod
 
             IsVisible = !IsVisible;
             tablet.SetActive(IsVisible);
+            if (Plugin.Instance.UI != null && Plugin.Instance.UI.enabled)
+                Plugin.Instance.UI.Toggle();
 
             if (IsVisible)
             {
