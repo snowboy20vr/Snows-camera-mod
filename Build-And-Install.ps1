@@ -6,8 +6,24 @@ Write-Host "  SNOW'S CAMERA MOD - AUTO BUILD/INSTALL" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
 
-$Root = $PSScriptRoot
-if ([string]::IsNullOrWhiteSpace($Root)) { $Root = (Get-Location).Path }
+$ScriptRoot = $PSScriptRoot
+if ([string]::IsNullOrWhiteSpace($ScriptRoot)) { $ScriptRoot = (Get-Location).Path }
+
+$Root = $null
+$probe = Get-Item -LiteralPath $ScriptRoot
+for ($i = 0; $i -lt 5 -and $probe; $i++) {
+    if (Test-Path (Join-Path $probe.FullName "Free\SnowsCameraFree.csproj")) {
+        $Root = $probe.FullName
+        break
+    }
+    $probe = $probe.Parent
+}
+if (-not $Root) {
+    $candidate = Get-ChildItem -LiteralPath $ScriptRoot -Filter "SnowsCameraFree.csproj" -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($candidate) { $Root = $candidate.Directory.Parent.FullName }
+}
+if (-not $Root) { throw "Could not find Free\SnowsCameraFree.csproj. Download the latest repository ZIP and run this script again." }
+Write-Host "Project root: $Root" -ForegroundColor DarkCyan
 
 function Find-GorillaTag {
     $candidates = @(
