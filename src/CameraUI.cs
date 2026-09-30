@@ -189,7 +189,14 @@ namespace SnowsCameraMod
 
             GUILayout.Space(14);
             GUILayout.Label("LOCAL CAMERA BADGE", label);
-            GUILayout.Label("The mod is structured for a small orange crown / camera-active marker above the local player. Network-visible markers should only be enabled where the current game networking API supports them safely.", small);
+            Plugin.Instance.Badge.Enabled = GUILayout.Toggle(Plugin.Instance.Badge.Enabled, "  Show orange crown badge");
+            Plugin.Instance.Badge.ShowCustomName = GUILayout.Toggle(Plugin.Instance.Badge.ShowCustomName, "  Show my custom name");
+            if (Plugin.Instance.Badge.ShowCustomName)
+            {
+                GUILayout.Label("Custom name", small);
+                Plugin.Instance.Badge.CustomName = GUILayout.TextField(Plugin.Instance.Badge.CustomName ?? "Snow", GUILayout.Height(26));
+            }
+            GUILayout.Label("Badge/name are local-only in this build, so other players do not receive a fake name tag or network change.", small);
             GUILayout.Space(8);
             GUILayout.Label("Snow's Camera Mod  •  v1.0.0", small);
         }
