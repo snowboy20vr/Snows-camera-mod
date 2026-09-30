@@ -7,6 +7,7 @@
     <AssemblyName>SnowsCameraPlus</AssemblyName>
     <RootNamespace>SnowsCameraPlus</RootNamespace>
     <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BepInEx"><HintPath>..\libs\BepInEx.dll</HintPath></Reference>
