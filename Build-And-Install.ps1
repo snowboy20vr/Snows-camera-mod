@@ -6,8 +6,8 @@ Write-Host "  SNOW'S CAMERA MOD - AUTO BUILD/INSTALL" -ForegroundColor Cyan
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
 
-$Root = Split-Path -Parent $PSScriptRoot
-if (-not $Root) { $Root = (Get-Location).Path }
+$Root = $PSScriptRoot
+if ([string]::IsNullOrWhiteSpace($Root)) { $Root = (Get-Location).Path }
 
 function Find-GorillaTag {
     $candidates = @(
