@@ -23,7 +23,7 @@ namespace SnowsCameraMod
         {
             if (!Enabled || Plugin.Instance == null || Plugin.Instance.Camera == null) return;
             Camera cam = Plugin.Instance.Camera.ActiveCamera;
-            TrackedPlayer target = Plugin.Instance.Camera.SelectedPlayer;
+            TrackedPlayer target = Plugin.Instance.Players.GetLocal();
             if (cam == null || target == null || target.Head == null) return;
 
             Vector3 screen = cam.WorldToScreenPoint(target.Head.position + Vector3.up * 0.38f);
